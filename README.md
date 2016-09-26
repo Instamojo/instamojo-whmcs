@@ -1,8 +1,13 @@
 # Instamojo WHMCS 6.0.X Payment Gateway Addon
 
+
+## Download:
+
+Download the latest release from the [releases section](https://github.com/Instamojo/instamojo-whmcs/releases).
+
 ##  Installation:
 
-Copy the contents of `modules` directory into your >WHMCS installation directory>/modules/ directory.
+Copy the contents of `modules` directory into your <WHMCS installation directory>/modules/ directory.
 
 ## Configuration
 
