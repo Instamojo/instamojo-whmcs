@@ -62,12 +62,16 @@ try{
 			instamojo_logger("Payment was credited with Payment ID :$payment_id");
 			$invoiceId = checkCbInvoiceID($order_id, $gatewayParams['name']);
 			$paymentAmount = $response->amount;
+			$currency = getCurrency();
+			instamojo_logger(print_r($currency, true));
+			$convertedPaymentAmount = currency_converter($paymentAmount, 'INR', $currency['code']);
+			instamojo_logger("Amount converted from $paymentAmount to $convertedPaymentAmount");
 			instamojo_logger("$invoiceId | $paymentAmount | $gatewayModuleName");
 			logTransaction($gatewayParams['name'], $array = json_decode(json_encode($response), true), $payment_status);
 			addInvoicePayment(
 				$invoiceId,
 				$payment_id,
-				$paymentAmount,
+				$convertedPaymentAmount,
 				0, //payment fees.
 				$gatewayModuleName
 			);

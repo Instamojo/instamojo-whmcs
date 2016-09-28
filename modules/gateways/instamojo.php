@@ -61,13 +61,9 @@ function instamojo_link($params)
     $amount = $params['amount'];
     $currencyCode = $params['currency'];
 
-    if ($currency['code'] !== 'INR') {
-        $result = mysql_fetch_array(select_query("tblcurrencies", "id", array("code"=>'INR')));
-        $inr_id = $result['id'];
-        $converted_amount = convertCurrency($amount, $currency['id'], $inr_id);
-    } else {
-        $converted_amount = $amount;
-    }
+    $converted_amount = currency_converter($amount, $currencyCode, 'INR');
+
+    instamojo_logger("Amount converted from $amount to $converted_amount for currency code '$currencyCode'.");
 
     // Client Parameters
     $firstname = $params['clientdetails']['firstname'];
@@ -96,7 +92,7 @@ function instamojo_link($params)
 	
 	try{
 		instamojo_logger("Creating Instamojo order for $invoiceId");
-		instamojo_logger("Instamojo Settings are CLinet id = $client_id | client secret = $client_secret } Testmode = $testMode");
+		instamojo_logger("Instamojo Settings are Client id = $client_id | client secret = $client_secret } Testmode = $testMode");
 		$api = new Instamojo($client_id, $client_secret, $testMode);
 		instamojo_logger("Data sending to instamojo for creating order ".print_r($postfields,true));
 		$response = $api->createOrderPayment($postfields);
