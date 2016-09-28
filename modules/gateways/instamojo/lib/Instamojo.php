@@ -94,11 +94,12 @@ Class Instamojo
 	
 }
 
+
 function instamojo_logger($msg, $add_newline=TRUE){
 
     $base_dir = dirname(dirname(__FILE__))."/logs/";
     $LOG_FILE = $base_dir  .  DIRECTORY_SEPARATOR . 'imojo.log';
-    date_default_timezone_set('Asia/Calcutta');
+    date_default_timezone_set('Asia/Kolkata');
     $date = date('m/d/Y h:i:s a', time());
 
     $msg = $date . " | " . $msg;
@@ -107,4 +108,16 @@ function instamojo_logger($msg, $add_newline=TRUE){
         $msg .= "\n";
     }
     error_log($msg, 3, $LOG_FILE);
+}
+
+
+function currency_converter($amount, $from_code, $to_code){
+	if ($from_code != $to_code){;
+    	$from = mysql_fetch_array(select_query("tblcurrencies", "id", array("code"=>$from_code)));
+    	$to = mysql_fetch_array(select_query("tblcurrencies", "id", array("code"=>$to_code)));
+    	if(!(empty($from) or empty($to))){
+    		$amount = convertCurrency($amount, $from['id'], $to['id']);
+    	}
+	}
+	return $amount;
 }
