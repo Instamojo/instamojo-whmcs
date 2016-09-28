@@ -112,7 +112,7 @@ function instamojo_logger($msg, $add_newline=TRUE){
 
 
 function currency_converter($amount, $from_code, $to_code){
-	if ($from_code != $to_code){;
+	if ($from_code != $to_code){
     	$from = mysql_fetch_array(select_query("tblcurrencies", "id", array("code"=>$from_code)));
     	$to = mysql_fetch_array(select_query("tblcurrencies", "id", array("code"=>$to_code)));
     	if(!(empty($from) or empty($to))){
