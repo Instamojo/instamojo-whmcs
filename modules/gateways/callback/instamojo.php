@@ -44,7 +44,7 @@ try{
 	$client_id = $gatewayParams['instamojo_client_id'];
     $client_secret = $gatewayParams['instamojo_client_secret'];
     $testMode = ($gatewayParams['testMode']=="on")?1:0;
-	instamojo_logger("Instamojo Settings are CLinet id = $client_id | client secret = $client_secret  Testmode = $testMode");
+	instamojo_logger("Instamojo Settings are Client id = $client_id | client secret = $client_secret  Testmode = $testMode");
 	$api = new Instamojo($client_id,$client_secret,$testMode);
 		
 	$response = $api->getOrderById($payment_request_id);
