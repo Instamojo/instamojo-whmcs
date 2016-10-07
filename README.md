@@ -3,7 +3,7 @@
 
 ## Download:
 
-Download the latest release from the [releases section](https://github.com/Instamojo/instamojo-whmcs/releases).
+Download the zip from [latest release](https://github.com/Instamojo/instamojo-whmcs/releases/latest) section.
 
 ##  Installation:
 
