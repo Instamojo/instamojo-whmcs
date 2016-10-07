@@ -48,8 +48,10 @@ try{
 	$api = new Instamojo($client_id,$client_secret,$testMode);
 		
 	$response = $api->getOrderById($payment_request_id);
-	instamojo_logger("Response from server ".print_r($response,true));
-	$payment_status = $response->payments[0]->status;
+
+	$payment_status = $api->getPaymentStatus($payment_id, $response->payments);
+	instamojo_logger("Payment status for $payment_id is $payment_status");
+	
 	if($payment_status == "successful" OR  $payment_status =="failed" )
 	{
 		$order_id = $response->transaction_id;

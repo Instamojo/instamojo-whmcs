@@ -91,6 +91,14 @@ Class Instamojo
 		else
 			throw new Exception("Unable to Fetch Payment Request id:'$id' Server Responds ".print_R($result,true));
 	}
+
+	public function getPaymentStatus($payment_id, $payments){
+		foreach($payments as $payment){
+		    if($payment->id == $payment_id){
+			    return $payment->status;
+		    }
+		}
+	}
 	
 }
 
